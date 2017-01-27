@@ -7,4 +7,5 @@ packaging==16.8
 psycopg2==2.6.2
 pyparsing==2.1.10
 six==1.10.0
+waitress==1.0.1
 whitenoise==3.3.0
