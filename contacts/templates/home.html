@@ -1,5 +1,6 @@
 {% load staticfiles %}
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -175,7 +176,7 @@
   <div class="container">
     <div class="row">
     <div class="col-sm-8 col-sm-offset-2 text-center m-b-lg">
-      <p class="lead m-x-auto">I have over <strong>20 years of experience</strong>, working with people, implementing solutions that solves business problems.</p>
+      <p class="lead m-x-auto">I have over <strong>20 years of experience</strong>, working with people, implementing solutions that solve problems.</p>
     </div>
     </div>
     <div class="row">
@@ -333,11 +334,18 @@
     <p class="lead m-b-md">
       Want to get in <strong>touch</strong>?  Fill out the form below.
     </p>
-    <form class="form-inline" id="signup">
+
+<!--    <form class="form-inline" id="signup">
       <input class="form-control m-b" placeholder="Email Address">
       <input class="form-control m-b" type="password" placeholder="Create a Password">
       <button class="btn btn-primary m-b">Send</button>
     </form>
+-->
+
+    <form class="form-inline" role="form" action="" method="post" id="signup">      {% csrf_token %}      {{ form.as_p }}      <button type="submit">Send</button>    </form>
+
+
+
 <!--    <small class="text-muted">
       By clicking "Get started" I agree to TREC's
       <a href="#">Terms of service</a>
