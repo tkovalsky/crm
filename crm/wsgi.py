@@ -8,14 +8,14 @@ https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "crm.settings_production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "crm.settings")
 
 
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "crm.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "crm.settings_production")
 
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
