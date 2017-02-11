@@ -22,8 +22,9 @@ from contacts import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home_page_view, name='home'),
-]
+    url(r'^$', TemplateView.as_view(template_name='home.html')),
+    url(r'^crm/', include('contacts.urls')),
+    ]
 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -60,56 +60,45 @@
             <ul class="nav nav-pills nav-stacked">
               <li class="nav-header">Dashboard</li>
               <li class="nav-item">
-                <a class="nav-link active" href="{% url 'index' %}">Overview</a>
+                <a class="nav-link active" href="#">Overview</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{% url 'sales' %}">Sales</a>
+                <a class="nav-link " href="{% url 'contacts' %}">Contacts</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{% url 'leases' %}">Leases</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="#">Tenant Reps</a>
+                <a class="nav-link " href="{% url 'companies' %}">Companies</a>
               </li>
 
               <li class="nav-header">Create New</li>
               <li class="nav-item">
-                <a class="nav-link "href="{% url 'sale-create' %}">
-                  Sale
+                <a class="nav-link "href="{% url 'add-contact' %}">
+                  Contact
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link "href="{% url 'lease-create' %}">
-                  Lease
+                <a class="nav-link "href="{% url 'add-company' %}">
+                  Company
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link " href="#">Tenant Rep</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="{% url 'locations' %}">Location</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="#">Contact</a>
-              </li>
-              <li class="nav-header">UPDATEME</li>
-              {% if request.user.is_authenticated %}
+
+<!--              <li class="nav-header">UPDATEME</li>
+              {# if request.user.is_authenticated #}
                 <li class="nav-item">
                   <a class="nav-link" href="#">Profile</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Sign out</a>
                 </li>
-              {% else %}
+              {# else #}
                 <li class="nav-item">
-                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+                  <a id="sign-up-link" class="nav-link" href="{# url 'account_signup' #}">Sign Up</a>
                 </li>
                 <li class="nav-item">
-                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">Sign In</a>
+                  <a id="log-in-link" class="nav-link" href="{# url 'account_login' #}">Sign In</a>
                 </li>
-              {% endif %}
+              {# endif #}
 
-
+-->
 
               <!--modal nav item-->
               <!--<li class="nav-item">-->

@@ -7,42 +7,72 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.template import Context
 from django.template.loader import get_template
+
 from django.views.generic import TemplateView, DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-
-
 from .forms import ContactForm
-from .models import Contact
+from .models import Contact, Company, Touch, Opportunity
 
 
 
-# Create your views here.
+# top page views
 
-class ContactsListView(ListView):
+
+
+# Contacts views
+class ContactListView(ListView):
     model = Contact
 
     def get_context_data(self, *args, **kwargs):
-        context = super(ContactsListView, self).get_context_data(*args, **kwargs)
+        context = super(ContactListView, self).get_context_data(*args, **kwargs)
 
 class ContactDetailView(DetailView):
     model = Contact
 
-class ContactCreateView(CreateView):
+class AddContactView(CreateView):
     #can use fields or form_class
     #form_class = AddSaleForm
     model = Contact
     fields = '__all__'
 
-class ContactUpdateView(UpdateView):
+class UpdateContactView(UpdateView):
     model = Contact
     fields = '__all__'
 
-class ContactDeleteView(DeleteView):
+class DeleteContactView(DeleteView):
     model = Contact
     #success_url = reverse_lazy('contacts')
 
-def home_page_view(request):
+
+# Company views
+class CompanyListView(ListView):
+    model = Company
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CompanyListView, self).get_context_data(*args, **kwargs)
+
+class CompanyDetailView(DetailView):
+    model = Company
+
+class AddCompanyView(CreateView):
+    #can use fields or form_class
+    #form_class = AddSaleForm
+    model = Company
+    fields = '__all__'
+
+class UpdateCompanyView(UpdateView):
+    model = Company
+    fields = '__all__'
+
+class DeleteCompanyView(DeleteView):
+    model = Company
+    #success_url = reverse_lazy('companies')
+
+
+
+# marketing page
+def home(request):
     form_class = ContactForm
 
     if request.method == 'POST':
@@ -72,3 +102,26 @@ def home_page_view(request):
             return redirect('home')
 
     return render(request, 'home.html', { 'form': form_class, })
+
+def index(request):
+    """
+    function based view  for the home page of this site
+    """
+    new_contacts=Contact.objects.all()[:5]
+
+
+    #Generate counts for some main objects
+    num_contacts=Contact.objects.all().count()
+    # Available books (status = 'a')
+    #num_instances_available=BookInstance.objects.filter(status__exact='a').count()
+    #num_authors=Author.objects.count() #'All' is implied by default
+
+    #Render the html template index.html with the data in the context variable
+    return render(
+        request,
+        'index.html',
+        context={
+            'new_contacts':new_contacts,
+            'num_contacts':num_contacts,
+        },
+    )
