@@ -30,6 +30,17 @@ class Contact(TimeStampedModel):
 
 class Company(TimeStampedModel):
     name = models.CharField(max_length=30, null=False, blank=False)
+
+    BUSINESS_TYPE = (
+        ('elect', 'Electrician'),
+        ('plumb', 'Plumber'),
+        ('hvac', 'HVAC'),
+        ('re', 'Real Estate'),
+        ('uncls', 'Not Classified'),
+    )
+
+    type_of_business = models.CharField(max_length=5, choices=BUSINESS_TYPE, blank=True, default='uncls', help_text="Business type")
+
     web_site_url = models.URLField(null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     email_composition = models.CharField(max_length=50, null=True, blank=True)
