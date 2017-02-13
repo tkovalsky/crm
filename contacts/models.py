@@ -7,15 +7,13 @@ from django.urls import reverse
 
 
 class Contact(TimeStampedModel):
-    name = models.CharField(max_length=30, null=True, blank=True)
-    company = models.ManyToManyField('Company', blank=True)
+    name = models.CharField(max_length=60, null=False, blank=False)
+    company = models.ForeignKey('Company', on_delete=models.SET_NULL, null=True, blank=True)
     email_address = models.EmailField(null=True, blank=True)
     linkedin_profile_url = models.URLField(null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     extension = models.CharField(max_length=5, null=True, blank=True)
     last_contact_date = models.DateField(null=True, blank=True)
-    notes = models.ForeignKey('Note', null=True, blank=True)
-    touches = models.ForeignKey('Touch', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -31,9 +29,11 @@ class Contact(TimeStampedModel):
 
 
 class Company(TimeStampedModel):
-    name = models.CharField(max_length=30, null=True, blank=True)
-    web_site = models.URLField(null=True, blank=True)
+    name = models.CharField(max_length=30, null=False, blank=False)
+    web_site_url = models.URLField(null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
+    email_composition = models.CharField(max_length=50, null=True, blank=True)
+
 
     def __str__(self):
         return self.name
@@ -49,11 +49,11 @@ class Company(TimeStampedModel):
         verbose_name_plural = "companies"
 
 class Touch(TimeStampedModel):
+    contact = models.ForeignKey('Contact', on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateField(auto_now=True, auto_now_add=False)
     touch_type = models.CharField(max_length=20) #add a reference for a dropdown selector
-    detail = models.TextField(max_length=140)
     follow_up_days = models.PositiveIntegerField(default=0)
-    follow_up_date = models.CharField(max_length=20) #add a reference for a dropdown selector
+    follow_up_date = models.CharField(max_length=20, null=True, blank=True) #add a reference for a dropdown selector
 
     def __str__(self):
         return "%s - %s" % (self.date, self.touch_type)
@@ -69,10 +69,12 @@ class Touch(TimeStampedModel):
 
 
 class Note(TimeStampedModel):
+    contact = models.ForeignKey('Contact', on_delete=models.SET_NULL, null=True, blank=True)
+    company = models.ForeignKey('Company', on_delete=models.SET_NULL, null=True, blank=True)
     note = models.TextField()
 
     def __str__(self):
-        return "%s - %s" % (self.note, self.created)
+        return "%s - %s - %s" % (self.contact, self.company, self.note )
 
     def get_absolute_url(self):
          """
