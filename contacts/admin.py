@@ -40,15 +40,15 @@ class ContactAdmin(admin.ModelAdmin):
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     list_display = (
-            'name', 'web_site_url', 'phone', 'email_composition')
+            'name', 'type_of_business', 'web_site_url', 'phone', 'email_composition')
     list_display_links = (
             'name',)
     list_filter = (
             'name',)
-    search_fields = ['name','email_composition', 'company__contacts',]
+    search_fields = ['name','email_composition', 'type_of_business', 'company__contacts',]
     fieldsets = (
         (None, {
-            'fields': ('name', 'web_site_url', 'phone', 'email_composition' )
+            'fields': ('name', 'type_of_business', 'web_site_url', 'phone', 'email_composition' )
         }),
 
     )
